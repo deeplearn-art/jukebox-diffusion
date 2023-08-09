@@ -110,7 +110,7 @@ class DDModel:
     tmp_saves = {'padded_audio':padded_audio, 'padded_noise':noise, 'generated':generated}
     for fn, save in tmp_saves.items():
       final_audio = rearrange(save, 'b c t -> c (b t)')
-      audio_fn = os.path.join('/home/ubuntu/sampling_trials/tmp_save/dd_samples', f"{fn}.wav")
+      audio_fn = os.path.join('/content', f"{fn}.wav")
       final_audio = final_audio.clamp(-1, 1).mul(32767).to(torch.int16).cpu()
       torchaudio.save(audio_fn, final_audio, self.sample_rate)
     generated = generated[:,:,:-pad_length]
